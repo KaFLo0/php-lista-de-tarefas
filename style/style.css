@@ -1,5 +1,24 @@
-.menu, .app {
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer hr {
+  border: 0;
+  height: 1px;
+  background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+}
+
+.menu {
 	margin-bottom: 1.563rem;
+}
+
+.app {
+	margin-top: 1.563rem;
 }
 
 .pagina {
@@ -10,7 +29,7 @@
 li.list-group-item.active {
 	background-color: #FFF;
 	border-color: #009933;
-	border-left: #009933;
+	border-left: 10px solid #009933;
 }
 
 li a {
@@ -23,4 +42,9 @@ li a:hover {
 
 h4 {
 	color: #009933 !important;
+}
+
+a.navbar-brand>img {
+	width: 30px;
+	height: 30px;
 }
