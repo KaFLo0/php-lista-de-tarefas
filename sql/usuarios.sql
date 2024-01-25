@@ -1,6 +1,6 @@
-create table tb_usuarios(
-  id int not null primary key auto_increment,
-  nome varchar(50) not null,
-  email varchar(100) not null,
-  senha varchar(32) not null
+CREATE TABLE tb_usuarios(
+  id INT NOT NULL PRIMARY KEY auto_increment,
+  nome VARCHAR(50) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  senha VARCHAR(32) NOT NULL
 );
