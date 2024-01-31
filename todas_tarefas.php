@@ -17,60 +17,10 @@
 	<!-- Style -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
-	<link rel="stylesheet" href="style/style.css"/>
+	<link rel="stylesheet" href="src/style/style.css"/>
 
 	<!-- Script -->
-	<script>
-		function editar(id, txt_tarefa) {
-			// Criar um form de edição
-			let form = document.createElement('form');
-			form.action = 'tarefa_controller.php?acao=atualizar';
-			form.method = 'post';
-			form.className = 'row';
-
-			// Criar um input para entrada do texto
-			let inputTarefa = document.createElement('input');
-			inputTarefa.type = 'text';
-			inputTarefa.name = 'tarefa';
-			inputTarefa.className = 'form-control col-9';
-			inputTarefa.value = txt_tarefa;
-
-			// Criar um input hidden para guardar o id da tarefa
-			let inputId = document.createElement('input');
-			inputId.type = 'hidden';
-			inputId.name = 'id';
-			inputId.value = id;
-
-			// Criar um button para envio do form
-			let button = document.createElement('button');
-			button.type = 'submit';
-			button.className = 'btn btn-info col-3';
-			button.innerHTML = 'Atualizar';
-
-			// Incluir inputTarefa no form
-			form.appendChild(inputTarefa);
-
-			// Incluir inputId no form
-			form.appendChild(inputId);
-
-			// Incluir button no form
-			form.appendChild(button);
-
-			// Selecionar a div tarefa
-			let tarefa = document.getElementById('tarefa_'+id);
-
-			// Limpar o texto da tarefa para inclusão do form
-			tarefa.innerHTML = '';
-
-			// Incluir o form na página
-			tarefa.insertBefore(form, tarefa[0]);
-
-		}
-
-		function remover(id) {
-			location.href = 'todas_tarefas.php?acao=remover&id='+id;
-		}
-	</script>
+	<script src="src/javascript/todas_tarefas.js"></script>
 
 	<title>Lista de tarefas</title>
 </head>
@@ -109,8 +59,10 @@
 									</div>
 									<div class="col-sm-3 mt-2 d-flex justify-content-between">
 										<i class="fas fa-trash-alt fa-lg text-danger" onclick="remover(<?= $valor['id'] ?>)"></i>
-										<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $valor['id'] ?>, '<?= $valor['tarefa'] ?>')"></i>
-										<i class="fas fa-check-square fa-lg text-success"></i>
+										<?php if($valor['status'] == 'pendente') { ?>
+											<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $valor['id'] ?>, '<?= $valor['tarefa'] ?>')"></i>
+											<i class="fas fa-check-square fa-lg text-success" onclick="marcarRealizada(<?= $valor['id'] ?>)"></i>
+										<?php } ?>
 									</div>
 								</div>
 							<?php } ?>
