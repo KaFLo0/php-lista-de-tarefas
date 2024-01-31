@@ -23,6 +23,56 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"/>
 	<link rel="stylesheet" href="style/style.css"/>
 
+	<!-- Script -->
+	<script>
+		function editar(id, txt_tarefa) {
+			// Criar um form de edição
+			let form = document.createElement('form');
+			form.action = '#';
+			form.method = 'post';
+			form.className = 'row';
+
+			// Criar um input para entrada do texto
+			let inputTarefa = document.createElement('input');
+			inputTarefa.type = 'text';
+			inputTarefa.name = 'tarefa';
+			inputTarefa.className = 'form-control col-9';
+			inputTarefa.value = txt_tarefa;
+
+			// Criar um input hidden para guardar o id da tarefa
+			let inputId = document.createElement('input');
+			inputId.type = 'hidden';
+			inputId.name = 'id';
+			inputId.value = id;
+
+			// Criar um button para envio do form
+			let button = document.createElement('button');
+			button.type = 'submit';
+			button.className = 'btn btn-info col-3';
+			button.innerHTML = 'Atualizar';
+
+			// Incluir inputTarefa no form
+			form.appendChild(inputTarefa);
+
+			// Incluir inputId no form
+			form.appendChild(inputId);
+
+			// Incluir button no form
+			form.appendChild(button);
+
+			// Selecionar a div tarefa
+			let tarefa = document.getElementById('tarefa_'+id);
+
+			// Limpar o texto da tarefa para inclusão do form
+			tarefa.innerHTML = '';
+
+			// Incluir o form na página
+			tarefa.insertBefore(form, tarefa[0]);
+
+			// alert(txt_tarefa);
+		}
+	</script>
+
 	<title>Lista de tarefas</title>
 </head>
 
@@ -55,10 +105,12 @@
 
 							<?php foreach ($tarefas as $indice => $valor) { ?>
 								<div class="row mb-3 d-flex align-items-center tarefa">
-									<div class="col-sm-9"><?= $valor['tarefa'] ?> (<?= $valor['status'] ?>)</div>
+									<div id="tarefa_<?= $valor['id'] ?>" class="col-sm-9">
+										<?= $valor['tarefa'] ?> (<?= $valor['status'] ?>)
+									</div>
 									<div class="col-sm-3 mt-2 d-flex justify-content-between">
 										<i class="fas fa-trash-alt fa-lg text-danger"></i>
-										<i class="fas fa-edit fa-lg text-info"></i>
+										<i class="fas fa-edit fa-lg text-info" onclick="editar(<?= $valor['id'] ?>, '<?= $valor['tarefa'] ?>')"></i>
 										<i class="fas fa-check-square fa-lg text-success"></i>
 									</div>
 								</div>
